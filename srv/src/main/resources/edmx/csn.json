@@ -1,130 +1,5 @@
 {
-  "namespace": "my.bookshop",
   "definitions": {
-    "my.bookshop.Books": {
-      "kind": "entity",
-      "elements": {
-        "ID": {
-          "key": true,
-          "indexNo": 1,
-          "type": "cds.Integer",
-          "@cds.persistence.name": "ID"
-        },
-        "title": {
-          "indexNo": 2,
-          "type": "cds.String",
-          "@cds.persistence.name": "TITLE"
-        },
-        "author": {
-          "indexNo": 3,
-          "type": "cds.Association",
-          "target": "my.bookshop.Authors",
-          "foreignKeys": {
-            "ID": {
-              "path": "ID",
-              "indexNo": 1,
-              "generatedFieldName": "author_ID",
-              "@cds.persistence.name": "ID"
-            }
-          },
-          "@cds.persistence.name": "AUTHOR"
-        },
-        "stock": {
-          "indexNo": 4,
-          "type": "cds.Integer",
-          "@cds.persistence.name": "STOCK"
-        },
-        "author_ID": {
-          "type": "cds.Integer",
-          "@odata.foreignKey4": "author",
-          "@cds.persistence.name": "AUTHOR_ID"
-        }
-      },
-      "@cds.persistence.name": "MY_BOOKSHOP_BOOKS"
-    },
-    "my.bookshop.Authors": {
-      "kind": "entity",
-      "elements": {
-        "ID": {
-          "key": true,
-          "indexNo": 1,
-          "type": "cds.Integer",
-          "@cds.persistence.name": "ID"
-        },
-        "name": {
-          "indexNo": 2,
-          "type": "cds.String",
-          "@cds.persistence.name": "NAME"
-        },
-        "books": {
-          "indexNo": 3,
-          "type": "cds.Association",
-          "target": "my.bookshop.Books",
-          "cardinality": {
-            "targetMax": "*"
-          },
-          "onCond": {
-            "op": "=",
-            "args": [
-              {
-                "=": "books.author"
-              },
-              {
-                "=": "$self"
-              }
-            ]
-          },
-          "@cds.persistence.name": "BOOKS"
-        }
-      },
-      "@cds.persistence.name": "MY_BOOKSHOP_AUTHORS"
-    },
-    "my.bookshop.Orders": {
-      "kind": "entity",
-      "elements": {
-        "ID": {
-          "key": true,
-          "indexNo": 1,
-          "type": "cds.UUID",
-          "@cds.persistence.name": "ID"
-        },
-        "book": {
-          "indexNo": 2,
-          "type": "cds.Association",
-          "target": "my.bookshop.Books",
-          "foreignKeys": {
-            "ID": {
-              "path": "ID",
-              "indexNo": 1,
-              "generatedFieldName": "book_ID",
-              "@cds.persistence.name": "ID"
-            }
-          },
-          "@cds.persistence.name": "BOOK"
-        },
-        "buyer": {
-          "indexNo": 3,
-          "type": "cds.String",
-          "@cds.persistence.name": "BUYER"
-        },
-        "date": {
-          "indexNo": 4,
-          "type": "cds.DateTime",
-          "@cds.persistence.name": "DATE"
-        },
-        "amount": {
-          "indexNo": 5,
-          "type": "cds.Integer",
-          "@cds.persistence.name": "AMOUNT"
-        },
-        "book_ID": {
-          "type": "cds.Integer",
-          "@odata.foreignKey4": "book",
-          "@cds.persistence.name": "BOOK_ID"
-        }
-      },
-      "@cds.persistence.name": "MY_BOOKSHOP_ORDERS"
-    },
     "CatalogService": {
       "kind": "service",
       "@source": "srv/cat-service.cds"
@@ -325,6 +200,130 @@
         }
       },
       "@cds.persistence.name": "CATALOGSERVICE_ORDERS"
+    },
+    "my.bookshop.Books": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "indexNo": 1,
+          "type": "cds.Integer",
+          "@cds.persistence.name": "ID"
+        },
+        "title": {
+          "indexNo": 2,
+          "type": "cds.String",
+          "@cds.persistence.name": "TITLE"
+        },
+        "author": {
+          "indexNo": 3,
+          "type": "cds.Association",
+          "target": "my.bookshop.Authors",
+          "foreignKeys": {
+            "ID": {
+              "path": "ID",
+              "indexNo": 1,
+              "generatedFieldName": "author_ID",
+              "@cds.persistence.name": "ID"
+            }
+          },
+          "@cds.persistence.name": "AUTHOR"
+        },
+        "stock": {
+          "indexNo": 4,
+          "type": "cds.Integer",
+          "@cds.persistence.name": "STOCK"
+        },
+        "author_ID": {
+          "type": "cds.Integer",
+          "@odata.foreignKey4": "author",
+          "@cds.persistence.name": "AUTHOR_ID"
+        }
+      },
+      "@cds.persistence.name": "MY_BOOKSHOP_BOOKS"
+    },
+    "my.bookshop.Authors": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "indexNo": 1,
+          "type": "cds.Integer",
+          "@cds.persistence.name": "ID"
+        },
+        "name": {
+          "indexNo": 2,
+          "type": "cds.String",
+          "@cds.persistence.name": "NAME"
+        },
+        "books": {
+          "indexNo": 3,
+          "type": "cds.Association",
+          "target": "my.bookshop.Books",
+          "cardinality": {
+            "targetMax": "*"
+          },
+          "onCond": {
+            "op": "=",
+            "args": [
+              {
+                "=": "books.author"
+              },
+              {
+                "=": "$self"
+              }
+            ]
+          },
+          "@cds.persistence.name": "BOOKS"
+        }
+      },
+      "@cds.persistence.name": "MY_BOOKSHOP_AUTHORS"
+    },
+    "my.bookshop.Orders": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "indexNo": 1,
+          "type": "cds.UUID",
+          "@cds.persistence.name": "ID"
+        },
+        "book": {
+          "indexNo": 2,
+          "type": "cds.Association",
+          "target": "my.bookshop.Books",
+          "foreignKeys": {
+            "ID": {
+              "path": "ID",
+              "indexNo": 1,
+              "generatedFieldName": "book_ID",
+              "@cds.persistence.name": "ID"
+            }
+          },
+          "@cds.persistence.name": "BOOK"
+        },
+        "buyer": {
+          "indexNo": 3,
+          "type": "cds.String",
+          "@cds.persistence.name": "BUYER"
+        },
+        "date": {
+          "indexNo": 4,
+          "type": "cds.DateTime",
+          "@cds.persistence.name": "DATE"
+        },
+        "amount": {
+          "indexNo": 5,
+          "type": "cds.Integer",
+          "@cds.persistence.name": "AMOUNT"
+        },
+        "book_ID": {
+          "type": "cds.Integer",
+          "@odata.foreignKey4": "book",
+          "@cds.persistence.name": "BOOK_ID"
+        }
+      },
+      "@cds.persistence.name": "MY_BOOKSHOP_ORDERS"
     }
   },
   "version": {
