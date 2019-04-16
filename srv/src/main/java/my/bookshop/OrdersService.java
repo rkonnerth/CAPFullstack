@@ -60,16 +60,23 @@ public class OrdersService {
 		// We set an ID for the order, its creation time, an order amount of 1000 units,
 		// and set the object reference to the ordered book. All other attributes of the
 		// Orders entity remain unchanged (for example, the buyer).
+		
+		Books book = em.find(Books.class, createRequest.getData().getElementValue("book_ID"));
 		Orders order = createRequest.getData().as(Orders.class);
+		
+		// Reduce stock of ordered book by ordered amount
+		book.setStock(book.getStock() - order.getAmount());
+		
 		order.setID(UUID.randomUUID().toString());
 		order.setDate(new Date());
-		order.setAmount(1000);
-		order.setBook(em.find(Books.class, createRequest.getData().getElementValue("book_ID")));
+		order.setBook(book);
+		
 
 		// Using the persist method of the EntityManager we add the newly created
 		// Orders object to the JPA persistency, so that once the current transaction is
 		// committed, this new order is added to the database.
 		em.persist(order);
+		em.merge(book);
 
 		// Finally, to return the newly created entity in the response, we create an
 		// EntityData representation of the order.
